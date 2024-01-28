@@ -46,9 +46,41 @@ class DescriptiveStatistics {
     return sortedData[sortedData.length - 1] - sortedData[0];
   }
 
-  static range(data){
-    const sortedData = data.sort((a, b) => a -b);
-    return sortedData[sortedData.length - 1] - sortedData[0];
+  // Variance
+  static variance(data) {
+    const meanValue = this.mean(data);
+    const squaredDifferences = data.map((value) =>
+      Math.pow(value - meanValue, 2)
+    );
+    const sumSquaredDiff = squaredDifferences.reduce(
+      (acc, value) => acc + value,
+      0
+    );
+    return sumSquaredDiff / data.length;
+  }
+
+  // Standard Deviation
+  static standardDeviation(data) {
+    return Math.sqrt(this.variance(data));
+  }
+
+   // Interquartile Range
+  static interquartileRange(data) {
+    const sortedData = data.sort((a, b) => a - b);
+    const middle = Math.floor(sortedData.length / 2);
+    const lowerHalf = sortedData.slice(0, middle);
+    const upperHalf = sortedData.slice(middle + 1);
+
+    return this.range(upperHalf) - this.range(lowerHalf);
+  }
+
+  // Mean Absolute Deviation
+  static meanAbsoluteDeviation(data) {
+    const meanValue = this.mean(data);
+    const absoluteDifferences = data.map((value) =>
+      Math.abs(value - meanValue)
+    );
+    return this.mean(absoluteDifferences);
   }
 }
 
