@@ -1,31 +1,11 @@
-/*a class that displays static number count instance
-a static greet instance and 
-shows the class increment (class) using construction function
-*/
-class count{
-    static counter = 0; //create static property for count
+class descriptiveStatistics{
+    //mean data
 
-    //add a constructor that counts 
-    constructor(){
-        count.counter ++ //increment counter on instances
-    }
-
-    static greet(){
-        console.log("Hello, good evening!") 
-    }
-
-    number (){
-        console.log(countUpdates)
+    static mean(data){
+        const sum = data.reduce((acc, value) => acc + value, 0)
+        return sum/data.length;
     }
 }
 
-
-console.log(count.counter) //output the counting
-
-count.greet();//output the greet instance
-
-const countUpdate = new count; //output new counted instance
-const countUpdates = new count;
-console.log(count.counter);
-
-countUpdate.number();
+const data = [12, 5, 17, 22, 13, 19, 10, 32, 27]
+console.log(descriptiveStatistics.mean())
