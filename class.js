@@ -13,6 +13,10 @@ class count{
     static greet(){
         console.log("Hello, good evening!") 
     }
+
+    number (){
+        console.log(countUpdates)
+    }
 }
 
 
@@ -23,3 +27,5 @@ count.greet();//output the greet instance
 const countUpdate = new count; //output new counted instance
 const countUpdates = new count;
 console.log(count.counter);
+
+countUpdate.number();
