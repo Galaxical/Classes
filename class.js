@@ -1,48 +1,75 @@
-class descriptiveStatistics{
-    
-    //mean data
-    static mean(data) {
+class DescriptiveStatistics {
+  // Measures of Central Tendency
+
+  // Mean
+  static mean(data) {
     const sum = data.reduce((acc, value) => acc + value, 0);
     return sum / data.length;
   }
 
-    //Median
-    static median (data){
-        const sortedData = data.sort((a, b) => a -b);
-        const middle = Math.floor(sortedData.length/2)
+  // Median
+  static median(data) {
+    const sortedData = data.sort((a, b) => a - b);
+    const middle = Math.floor(sortedData.length / 2);
+    if (sortedData.length % 2 === 0) {
+      return (sortedData[middle - 1] + sortedData[middle]) / 2;
+    } else {
+      return sortedData[middle];
+    }
+  }
 
-        if(sortedData.length % 2 === 0){
-            return (sortedData[middle - 1] + sortedData[middle])/2;
-        }
+  // Mode
+  static mode(data) {
+    const frequencyMap = {};
+    data.forEach((value) => {
+      frequencyMap[value] = (frequencyMap[value] || 0) + 1;
+    });
 
-        else{
-            return sortedData[middle]
-        }
+    let mode;
+    let maxFrequency = 0;
+
+    for (const key in frequencyMap) {
+      if (frequencyMap[key] > maxFrequency) {
+        mode = key;
+        maxFrequency = frequencyMap[key];
+      }
     }
 
-    //Mode
-    static mode(data){
-        const highFrequency = {}
-        data.foreach(value => {
-            highFrequency[value] = (highFrequency[value] || 0) + 1;
-        });
+    return mode;
+  }
 
-        let mode;
-        let maxFrequency = 0;
+  // Measures of Dispersion
 
-        for(const key in highFrequency){
-            if(highFrequency[key] > maxFrequency){
-                mode = key;
-                maxFrequency = highFrequency[key];
-            }
-        }
+  // Range
+  static range(data) {
+    const sortedData = data.sort((a, b) => a - b);
+    return sortedData[sortedData.length - 1] - sortedData[0];
+  }
 
-        return mode;
-    }
-
+  static range(data){
+    const sortedData = data.sort((a, b) => a -b);
+    return sortedData[sortedData.length - 1] - sortedData[0];
+  }
 }
 
-const data = [12, 5, 17, 22, 13, 19, 10, 32, 27]
-console.log(descriptiveStatistics.mean())
-console.log(descriptiveStatistics.median())
-console.log(descriptiveStatistics.mode())
+// Example usage
+const data = [4, 7, 1, 9, 6, 7, 2, 8, 3, 5];
+
+console.log("Mean:", DescriptiveStatistics.mean(data));
+console.log("Median:", DescriptiveStatistics.median(data));
+console.log("Mode:", DescriptiveStatistics.mode(data));
+
+console.log("Range:", DescriptiveStatistics.range(data));
+console.log("Variance:", DescriptiveStatistics.variance(data));
+console.log(
+  "Standard Deviation:",
+  DescriptiveStatistics.standardDeviation(data)
+);
+console.log(
+  "Interquartile Range:",
+  DescriptiveStatistics.interquartileRange(data)
+);
+console.log(
+  "Mean Absolute Deviation:",
+  DescriptiveStatistics.meanAbsoluteDeviation(data)
+);
